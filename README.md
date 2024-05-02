@@ -78,7 +78,7 @@ More detailed information :
 ## Tasks
 
 The playbook performs the following tasks:
-`
+
     1. Logs into the client host via SSH using an SSH key/Pem Key.
 
     2. Changes the timezone to Europe/Spain.
