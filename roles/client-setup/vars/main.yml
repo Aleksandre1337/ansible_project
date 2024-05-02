@@ -1,0 +1,17 @@
+---
+# vars file for client-setup
+
+country: Europe/Madrid
+hostname: managed-by-ansible
+motd: client.j2
+
+packages:
+  - vim
+  - telnet
+  - htop
+  - iotop
+  - atop
+  - mc
+  - traceroute
+  - unzip
+

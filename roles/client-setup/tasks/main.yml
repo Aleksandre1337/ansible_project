@@ -1,0 +1,52 @@
+---
+# tasks file for client-setup
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: "{{ packages }}"
+
+- name: Set Timezone
+  timezone:
+    name: "{{ country }}"
+
+- name: Set Hostname
+  hostname:
+    name: "{{ hostname }}"
+    use: systemd
+
+- name: Get current user
+  shell: whoami
+  register: current_user
+  changed_when: false
+
+- name: Set custom MOTD
+  template:
+    src: "{{ motd }}"
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create directories
+  file:
+    path: "/opt/academy-{{ item }}"
+    state: directory
+  loop:
+    - foo
+    - bar
+    - baz
+
+- name: Copy files to corresponding directories
+  copy:
+    src: "~/ansible_project/roles/client-setup/files/{{ item }}"
+    dest: "/opt/academy-{{ item.split('-')[0] }}/{{ item }}"
+  loop:
+    - foo-file1
+    - foo-file2
+    - bar-file1
+    - bar-file2
+    - baz-file1
+    - baz-file2

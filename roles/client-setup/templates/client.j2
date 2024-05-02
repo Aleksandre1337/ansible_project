@@ -1,0 +1,16 @@
+=======================================================================================================
+Welcome to {{ ansible_hostname }}!
+
+    User: {{ lookup('env', 'USER') }}
+
+    Date: {{ ansible_date_time.date }}
+    Time: {{ ansible_date_time.time }}
+    Timezone: {{ ansible_date_time.tz }}
+    Based on: {{ country }}
+
+    OS: {{ ansible_distribution }}
+    Version: {{ ansible_distribution_version }}
+    IP: {{ ansible_default_ipv4.address }}
+
+Remember, unauthorized access is strictly prohibited. Enjoy your stay!
+=======================================================================================================
