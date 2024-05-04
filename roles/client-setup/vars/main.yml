@@ -15,3 +15,16 @@ packages:
   - traceroute
   - unzip
 
+dirnames:
+  - foo
+  - bar
+  - baz
+
+filenames:
+  - foo-file1
+  - foo-file2
+  - bar-file1
+  - bar-file2
+  - baz-file1
+  - baz-file2
+
