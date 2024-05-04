@@ -34,19 +34,10 @@
   file:
     path: "/opt/academy-{{ item }}"
     state: directory
-  loop:
-    - foo
-    - bar
-    - baz
+  loop: "{{ dirnames }}"
 
 - name: Copy files to corresponding directories
   copy:
-    src: "~/ansible_project/roles/client-setup/files/{{ item }}"
+    src: "roles/client-host/files/{{ item }}"
     dest: "/opt/academy-{{ item.split('-')[0] }}/{{ item }}"
-  loop:
-    - foo-file1
-    - foo-file2
-    - bar-file1
-    - bar-file2
-    - baz-file1
-    - baz-file2
+  loop: "{{ filenames }}"
