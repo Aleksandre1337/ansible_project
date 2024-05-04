@@ -1,0 +1,5 @@
+---
+- name: Configure client
+  hosts: client
+  roles:
+    - client-setup

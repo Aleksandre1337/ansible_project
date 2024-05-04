@@ -8,11 +8,11 @@
     update_cache: yes
   loop: "{{ packages }}"
 
-- name: Set Timezone
+- name: Set custom timezone
   timezone:
     name: "{{ country }}"
 
-- name: Set Hostname
+- name: Set custom hostname
   hostname:
     name: "{{ hostname }}"
     use: systemd
@@ -38,6 +38,7 @@
 
 - name: Copy files to corresponding directories
   copy:
-    src: "roles/client-host/files/{{ item }}"
+    src: "roles/client-setup/files/{{ item }}"
     dest: "/opt/academy-{{ item.split('-')[0] }}/{{ item }}"
   loop: "{{ filenames }}"
+

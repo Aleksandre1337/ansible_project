@@ -6,6 +6,7 @@ This project automates the setup of a client host using Ansible. It includes pla
 
 ```
 .
+├── README.md
 ├── ansible.cfg
 ├── inventory
 └── roles
@@ -23,6 +24,8 @@ This project automates the setup of a client host using Ansible. It includes pla
         ├── handlers
         │   └── main.yml
         ├── meta
+        │   └── main.yml
+        ├── playbooks
         │   └── main.yml
         ├── tasks
         │   └── main.yml
@@ -49,6 +52,8 @@ This project automates the setup of a client host using Ansible. It includes pla
 - `main.yml`: Handler tasks.
 - `meta`: Directory containing metadata for the role.
 - `main.yml`: Metadata for the role.
+- `playbooks`: Directory containing playbooks.
+- `main.yml`: Main playbook for the project.
 - `tasks`: Directory containing tasks for the role.
 - `main.yml`: Main tasks file.
 - `templates`: Directory containing templates for the role.
@@ -62,59 +67,55 @@ This project automates the setup of a client host using Ansible. It includes pla
 Run the main playbook with the following command:
 
 ```bash
-ansible-playbook playbooks/setup_client.yml
+ansible-playbook roles/client-setup/playbooks/main.yml
 ```
 
 ## Role Details
 
-The `client-setup` role performs the following tasks:
+The client-setup role performs the following tasks:
 
 - Configures various settings on the client host including timezone, hostname, and software installations.
 - Sets up the Message of the Day (MOTD) to display system information.
 - Creates directories and copies corresponding files to the client host.
 
-More detailed information :
+More detailed information:
 
-## Tasks
+### Tasks
 
 The playbook performs the following tasks:
 
-    1. Logs into the client host via SSH using an SSH key/Pem Key.
+1. Logs into the client host via SSH using an SSH key/Pem Key.
+2. Changes the timezone to Europe/Spain.
+3. Changes the hostname.
+4. Installs the following tools with a single task:
+    - vim
+    - telnet
+    - htop
+    - iotop
+    - atop
+    - mc
+    - traceroute
+    - unzip
+5. Configures the Message of the Day (MOTD) to display the following information when logging in via SSH:
+    - The IP address of the machine
+    - The username
+    - The hostname
+    - The installed OS
+    - The time
+    - The timezone
+    - MOTD Warning Message
 
-    2. Changes the timezone to Europe/Spain.
+    Note: This information is dynamic and will update based on the machine you're logging into.
 
-    3. Changes the hostname.
+6. Creates the following directories in the `/opt` directory:
+    - academy-foo
+    - academy-bar
+    - academy-baz
 
-    4. Installs the following tools with a single task:
-        - vim
-        - telnet
-        - htop
-        - iotop
-        - atop
-        - mc
-        - traceroute
-        - unzip
-
-    5. Configures the Message of the Day (MOTD) to display the following information when logging in via SSH:
-        - The IP address of the machine
-        - The username
-        - The hostname
-        - The installed OS
-        - The time
-        - The timezone
-        - MOTD Warning Message
-
-        Note: This information is dynamic and will update based on the machine you're logging into.
-
-    6. Creates the following directories in the `/opt` directory:
-        - academy-foo
-        - academy-bar
-        - academy-baz
-
-    7. Copies the corresponding files into these directories. The files are named as follows:
-        - foo-file1
-        - foo-file2
-        - bar-file1
-        - bar-file2
-        - baz-file1
-        - baz-file2
+7. Copies the corresponding files into these directories. The files are named as follows:
+    - foo-file1
+    - foo-file2
+    - bar-file1
+    - bar-file2
+    - baz-file1
+    - baz-file2
